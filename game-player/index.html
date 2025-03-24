@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://www.swfgames.ct.ws/My%20log0.png">
+    <title>SWF Games</title>
+    <style>
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #121212; /* Dark background */
+    color: #fff; /* Light text color */
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+header {
+    background: #000; /* Black header */
+    padding: 20px 0;
+    color: #fff;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+#nav-container {
+    float: right;
+}
+
+#nav-container a {
+    color: #f44336; /* Red links */
+    text-decoration: none;
+}
+
+#nav-container a:hover {
+    text-decoration: underline;
+}
+
+.main-content {
+    padding: 40px;
+    background: #1e1e1e; /* Dark background for content */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    margin-top: 20px;
+    width: 80%;
+    max-width: 830px;
+    border-radius: 10px;
+}
+
+#search-bar {
+    margin-top: 20px;
+}
+
+#search-bar input {
+    padding: 10px;
+    font-size: 16px;
+    width: 80%;
+    margin-right: 10px;
+    border-radius: 5px;
+    border: 1px solid #f44336; /* Red border */
+    background: #333; /* Dark background for input */
+    color: #fff; /* Light text color in input */
+}
+
+#search-bar button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background: #f44336; /* Red background */
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+}
+
+#search-bar button:hover {
+    background: #d32f2f; /* Darker red on hover */
+}
+
+.categories {
+    margin-top: 40px;
+}
+
+.categories h3 {
+    color: #f44336; /* Red text for categories */
+}
+
+.categories ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.categories li {
+    margin: 10px 0;
+}
+
+.categories a {
+    color: #f44336; /* Red links */
+    text-decoration: none;
+}
+
+.categories a:hover {
+    text-decoration: underline;
+}
+
+footer {
+    background: #000; /* Black footer */
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <img src="https://www.swfgames.ct.ws/My%20log0-b.png" style="max-width:800px;width:80%;"></img><br>
+            <div id="nav-container">
+                <a href="https://www.swfgames.ct.ws/">Homepage</a>
+            </div>
+        </div>
+    </header>
+
+  <center>
+    <div class="main-content">
+        <h2>Welcome to SWF Games!</h2>
+        <div id='ruffle' style="text-align: center;"></div>
+
+    </div>
+  </center>
+
+    <footer>
+        <p>&copy; 2025 SWF Games. All Rights Reserved.</p>
+    </footer>
+      
+      <script>
+        const urlParams = new URLSearchParams(window.location.search);
+		var swfName = urlParams.get('g');
+        if (swfName == 'fpaw1') {
+			swfName = 'https://www.swfgames.ct.ws/games/fpaw1.swf';
+		} else if (!swfName) {
+			swfName = 'https://www.swfgames.ct.ws/games/default.swf';
+		}
+      </script>
+      <script src='https://unpkg.com/@ruffle-rs/ruffle/ruffle.js'></script>
+        <script>
+var swfobject = {};
+
+swfobject.embedSWF = function(url, cont, width, height){
+    var ruffle = window.RufflePlayer.newest(),
+        player = Object.assign(document.getElementById(cont).appendChild(ruffle.createPlayer()), {
+            width: width,
+            height: height,
+            style: 'width: ' + width + '%; height: ' + height + 'vh',
+        });
+          
+        window.RufflePlayer.config = {
+    // Options affecting the whole page
+          
+    "publicPath": undefined,
+    "polyfills": true,
+          
+    // Options affecting files only
+          
+    "autoplay": "on",
+    "unmuteOverlay": "hidden",
+    "letterbox": "on",
+    "warnOnUnsupportedContent": false,
+    "contextMenu": true,
+    "showSwfDownload": false,
+    "upgradeToHttps": window.location.protocol === "https:",
+    "maxExecutionDuration": {"secs": 15, "nanos": 0},
+    "logLevel": "error",
+    "base": null,
+    "menu": true,
+    "salign": "",
+    "scale": "showAll",
+    "forceScale": true,
+    "quality": "high",
+    "splashScreen": true,
+    "preloader": true,
+};
+    player.load({ url: url });
+}
+swfobject.embedSWF(swfName, 'ruffle', 100,55);
+        </script>
+</body>
+</html>
