@@ -4,35 +4,138 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SWF Games</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #121212; /* Dark background */
+    color: #fff; /* Light text color */
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+header {
+    background: #000; /* Black header */
+    padding: 20px 0;
+    color: #fff;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+#nav-container {
+    float: right;
+}
+
+#nav-container a {
+    color: #f44336; /* Red links */
+    text-decoration: none;
+}
+
+#nav-container a:hover {
+    text-decoration: underline;
+}
+
+.main-content {
+    padding: 40px;
+    background: #1e1e1e; /* Dark background for content */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    margin-top: 20px;
+    width: 80%;
+    max-width: 830px;
+    border-radius: 10px;
+}
+
+#search-bar {
+    margin-top: 20px;
+}
+
+#search-bar input {
+    padding: 10px;
+    font-size: 16px;
+    width: 80%;
+    margin-right: 10px;
+    border-radius: 5px;
+    border: 1px solid #f44336; /* Red border */
+    background: #333; /* Dark background for input */
+    color: #fff; /* Light text color in input */
+}
+
+#search-bar button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background: #f44336; /* Red background */
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+}
+
+#search-bar button:hover {
+    background: #d32f2f; /* Darker red on hover */
+}
+
+.categories {
+    margin-top: 40px;
+}
+
+.categories h3 {
+    color: #f44336; /* Red text for categories */
+}
+
+.categories ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.categories li {
+    margin: 10px 0;
+}
+
+.categories a {
+    color: #f44336; /* Red links */
+    text-decoration: none;
+}
+
+.categories a:hover {
+    text-decoration: underline;
+}
+
+footer {
+    background: #000; /* Black footer */
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+    </style>
 </head>
 <body>
     <header>
         <div class="container">
-            <h1>SWF Games</h1>
+            <img src="https://www.swfgames.ct.ws/My%20log0-b.png" style="max-width:800px;width:80%;"></img><br>
             <div id="nav-container">
-                <a href="games.html">Games</a>
+                <a href="https://www.swfgames.ct.ws/games/">Games</a>
             </div>
         </div>
     </header>
 
+  <center>
     <div class="main-content">
         <h2>Welcome to SWF Games!</h2>
-        <p>Enjoy classic Flash games that you loved in the past.</p>
-        <div id="search-bar">
-            <input type="text" placeholder="Search for games...">
-            <button>Search</button>
-        </div>
+        <p>Enjoy classic Flash games and Fancy Pants games.</p>
         <div class="categories">
-            <h3>Game Categories</h3>
-            <ul>
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Puzzle</a></li>
-                <li><a href="#">Adventure</a></li>
-                <li><a href="#">Arcade</a></li>
-            </ul>
+            <h3>News/Updates</h3>
+          	<p>Nothing new yet...</p>
         </div>
     </div>
+  </center>
 
     <footer>
         <p>&copy; 2025 SWF Games. All Rights Reserved.</p>
