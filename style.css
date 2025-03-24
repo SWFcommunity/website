@@ -3,7 +3,8 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background: #f2f2f2;
+    background: #121212; /* Dark background */
+    color: #fff; /* Light text color */
 }
 
 .container {
@@ -13,16 +14,16 @@ body {
 
 h1 {
     font-size: 36px;
-    color: #333;
+    color: #f44336; /* Red text color */
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 header {
-    background: #4CAF50;
+    background: #000; /* Black header */
     padding: 20px 0;
     color: #fff;
     text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
 #nav-container {
@@ -30,7 +31,7 @@ header {
 }
 
 #nav-container a {
-    color: #fff;
+    color: #f44336; /* Red links */
     text-decoration: none;
 }
 
@@ -40,8 +41,8 @@ header {
 
 .main-content {
     padding: 40px;
-    background: #fff;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background: #1e1e1e; /* Dark background for content */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     margin-top: 20px;
     border-radius: 10px;
 }
@@ -56,13 +57,15 @@ header {
     width: 80%;
     margin-right: 10px;
     border-radius: 5px;
-    border: 1px solid #ccc;
+    border: 1px solid #f44336; /* Red border */
+    background: #333; /* Dark background for input */
+    color: #fff; /* Light text color in input */
 }
 
 #search-bar button {
     padding: 10px 20px;
     font-size: 16px;
-    background: #4CAF50;
+    background: #f44336; /* Red background */
     border: none;
     border-radius: 5px;
     color: white;
@@ -70,7 +73,7 @@ header {
 }
 
 #search-bar button:hover {
-    background: #45a049;
+    background: #d32f2f; /* Darker red on hover */
 }
 
 .categories {
@@ -78,7 +81,7 @@ header {
 }
 
 .categories h3 {
-    color: #333;
+    color: #f44336; /* Red text for categories */
 }
 
 .categories ul {
@@ -91,7 +94,7 @@ header {
 }
 
 .categories a {
-    color: #4CAF50;
+    color: #f44336; /* Red links */
     text-decoration: none;
 }
 
@@ -100,7 +103,7 @@ header {
 }
 
 footer {
-    background: #333;
+    background: #000; /* Black footer */
     color: #fff;
     text-align: center;
     padding: 10px;
