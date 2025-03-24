@@ -193,11 +193,7 @@ swfobject.embedSWF = function(url, cont, width, height){
     "letterbox": "on",
     "warnOnUnsupportedContent": false,
     "contextMenu": true,
-    "showSwfDownload": false,
-    "upgradeToHttps": window.location.protocol === "https:",
-    "maxExecutionDuration": {"secs": 15, "nanos": 0},
     "logLevel": "error",
-    "base": null,
     "menu": true,
     "salign": "",
     "scale": "showAll",
@@ -205,6 +201,7 @@ swfobject.embedSWF = function(url, cont, width, height){
     "quality": "high",
     "splashScreen": true,
     "preloader": true,
+    "playerVersion": "13",
 };
     player.load({ url: url });
 }
