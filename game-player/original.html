@@ -1,0 +1,25 @@
+<body style="margin: 0;">
+	<embed style="width:100%;height:100vh;" pluginspage=" http://www.macromedia.com/go/getflashplayer" src="swfName" type="application/x-shockwave-flash"></embed>
+	<script>
+        const urlParams = new URLSearchParams(window.location.search);
+		var swfName = urlParams.get('g');
+        if (swfName == 'fpaw1') {
+			swfName = 'https://www.swfgames.ct.ws/games/fpaw1.swf';
+		}
+        else if (swfName == 'fpaw2') {
+			swfName = 'https://www.swfgames.ct.ws/games/fpaw2.swf';
+		}
+        else if (swfName == 'fpaw3') {
+			swfName = 'https://www.swfgames.ct.ws/games/fpaw3.swf';
+		}
+        else if (swfName == 'fpaw1r') {
+			swfName = 'https://www.swfgames.ct.ws/games/fpaw1r/fpaw1r.swf';
+		}
+        else if (swfName == 'fpas') {
+			swfName = 'https://www.swfgames.ct.ws/games/fpas.swf';
+		}
+        else if (!swfName) {
+			swfName = 'https://www.swfgames.ct.ws/games/default.swf';
+		}
+    </script>
+</body>
