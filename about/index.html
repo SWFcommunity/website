@@ -1,0 +1,148 @@
+<style>
+  body {
+    margin: 0;
+    font-family: Verdana, sans-serif;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  #gradient {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, #ff6d6e, rgba(255,109,110,0.93), rgba(0,0,0,0));
+    z-index: 1;
+  }
+
+  #bg {
+    z-index: 0;
+  }
+
+  #main {
+  	position: absolute;
+  	top: 0;
+  	z-index: 2;
+  	width: 100%;
+  	height: 100%;
+  }
+
+  #main-container {
+    max-width: 830px;
+	width: 63%;
+  	min-height: 60%;
+	background: linear-gradient(to bottom, #f3f3f3, #d3d3d3);
+	border: 1px solid #a1a1a1;
+	border-radius: 5px;
+	box-shadow: inset 0 1px 0 #fff, 0 1px 13px rgba(0, 0, 0, 0.5);
+	color: #333;
+	font-family: Verdana, sans-serif;
+	font-size: 14px;
+	padding: 15px;
+	text-shadow: 0 1px 0 #fff;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .categories h3 {
+    color: #e60000;
+  }
+
+  #toolbar {
+    transform: translateY(-15px);
+  }
+
+  .toolbar-btn, .toolbar-btn-s {
+    background: linear-gradient(to bottom, #f3f3f3, #e1e1e1);
+    border: 1px solid #a1a1a1;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    box-shadow: inset 0 1px 0 #fff, 0 1px 3px rgba(0, 0, 0, 0.3);
+    color: #333;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    padding: 5px 10%;
+    margin: 5px;
+    margin-top: 0;
+    text-shadow: 0 1px 0 #fff;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  .toolbar-btn:hover {
+    background: linear-gradient(to bottom, #e1e1e1, #f3f3f3);
+    cursor: pointer;
+  }
+
+  .toolbar-btn:active {
+    background: linear-gradient(to bottom, #d1d1d1, #e1e1e1);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
+  }
+
+  .toolbar-btn-s {
+    background: linear-gradient(to bottom, #d1d1d1, #e1e1e1);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
+  }
+
+  footer {
+    margin-bottom: -15px;
+  	margin-left: -15px;
+  	margin-right: -15px;
+    margin-top: auto;
+    padding: 10px;
+    background-color: #f3f3f3;
+    text-align: center;
+    font-size: 14px;
+    border-top: 1px solid #a1a1a1;
+  	border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+  	height: 38px;
+  	display: flex;
+  	align-items: center;
+  	justify-content: center;
+  }
+</style>
+
+<div id="gradient"></div>
+<svg width="100%" height="100%" id="bg" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="diagonalStripes" patternUnits="userSpaceOnUse" width="20" height="20" patternTransform="rotate(45)">
+      <rect width="10" height="20" fill="#ff4d4d" />
+      <rect x="10" width="10" height="20" fill="#ff6d6e" />
+    </pattern>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#diagonalStripes)" />
+</svg>
+
+<div id="main">
+  <center>
+    <img src="https://www.swfgames.ct.ws/My%20log0-b.png" style="max-width:830px;width:70%;margin:20px;" />
+    <div id="main-container">
+      <div id="toolbar">
+        <a href="https://www.swfgames.ct.ws/" target="_self"><button class="toolbar-btn">Homepage</button></a>
+        <a href="https://www.swfgames.ct.ws/games/" target="_self"><button class="toolbar-btn">Games</button></a>
+        <a><button class="toolbar-btn-s">About Us</button></a>
+      </div>
+      <h2>About SWF Games</h2>
+      <p style="text-align:left;">Welcome to SWF Games – your go-to platform for reliving the golden age of Flash gaming! Here, we bring you the best collection of classic Flash games, now playable directly in your browser thanks to the powerful Ruffle and AwayFL emulators. Whether you’re revisiting old favorites or discovering them for the first time, SWF Games offers a seamless experience to enjoy these timeless classics.</p>
+      <p style="text-align:left;">Our goal is simple: to provide a place where everyone can easily access and play their favorite Flash games without the need for downloads or installations. With a growing library of games across various genres—from action-packed adventures to mind-bending puzzles—there's something for everyone.</p>
+      <p style="text-align:left;">We also know that sometimes a little extra help is needed, which is why we feature playthrough videos for many of our games. These videos offer walkthroughs, tips, and strategies to help you overcome challenges and enhance your gaming experience.</p>
+      <p style="text-align:left;">At SWF Games, we’re dedicated to preserving the fun and nostalgia of Flash games while making them accessible to a new generation of players. Our website is constantly updated with new content, ensuring that you’ll always have something new to play and enjoy.</p>
+      <p style="text-align:left;">Thank you for visiting SWF Games. Dive in, play your favorites, and experience the best of Flash gaming, all over again!</p>
+      <footer>
+        © <p id="year" style="margin-left:5px;margin-right:5px"></p> SWF Games. All Rights Reserved.
+      </footer>
+    </div>
+  </center>
+</div>
+
+<script>
+const d = new Date();
+let year = d.getFullYear();
+document.getElementById("year").innerHTML = year;
+</script>
