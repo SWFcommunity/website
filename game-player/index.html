@@ -116,8 +116,35 @@
     width: 100%;
     height: auto;
     max-height: 60vh; /* Limit the height to 60% of the viewport */
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     border: 1px solid #888;
+  }
+  
+  #emu-container button {
+  	background: linear-gradient(to bottom, #f3f3f3, #e1e1e1);
+    border: 1px solid #a1a1a1;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    color: #333;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    padding: 10px 15px;
+    margin: 10px;
+    margin-top: 0;
+    text-shadow: 0 1px 0 none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  #emu-container button:hover {
+    background: linear-gradient(to bottom, #e1e1e1, #f3f3f3);
+    cursor: pointer;
+  }
+
+  #emu-container button:active {
+    background: linear-gradient(to bottom, #d1d1d1, #e1e1e1);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
   }
 </style>
 
@@ -143,7 +170,12 @@
       </div>
       <h2>Game Player</h2>
       <p id="gametitle">Enjoy classic Flash games and Fancy Pants games.</p>
-      <center><iframe id="gameFr"></iframe></center>
+      <center><iframe id="gameFr"></iframe>
+      <p>You are not currently using a flash emulator, just the original flash plugin.<br>You can choose one of the following emulators to use instead:</p>
+      <div id="emu-container">
+        <button id="toggle-btn-1">Ruffle</button><button id="toggle-btn-2">AwayFL</button>
+      </div>
+      </center>
       <footer>
         © <p id="year" style="margin-left:5px;margin-right:5px"></p> SWF Games. All Rights Reserved.
       </footer>
@@ -152,33 +184,54 @@
 </div>
 
 <script>
+    const button1 = document.getElementById('toggle-btn-1');
+  	const button2 = document.getElementById('toggle-btn-2');
+  
+  	button1.addEventListener('click', function() {
+    	button1.style.background = "linear-gradient(to bottom, #4d79ff, #1a53ff)";
+  		button1.style.color = "#FFF";
+  		button2.style.background = "linear-gradient(to bottom, #f3f3f3, #e1e1e1)";
+  		button2.style.color = "#333";
+  		document.getElementById('gameFr').src = "https://www.swfgames.ct.ws/game-player/ruffle.html?g=" + swfName;
+    });
+  
+  	button2.addEventListener('click', function() {
+    	button2.style.background = "linear-gradient(to bottom, #4d79ff, #1a53ff)";
+  		button2.style.color = "#FFF";
+  		button1.style.background = "linear-gradient(to bottom, #f3f3f3, #e1e1e1)";
+  		button1.style.color = "#333";
+  		document.getElementById('gameFr').src = "https://www.swfgames.ct.ws/game-player/awayfl.html?g=" + swfName;
+    });
+</script>
+
+<script>
     const urlParams = new URLSearchParams(window.location.search);
     var swfName = urlParams.get('g');
     var gameTitle = document.getElementById('gametitle');
     if (swfName == 'fpaw1') {
-      gameTitle.innerHTML = 'Play Fancy Pants Adventure: World 1';
+      gameTitle.innerHTML = 'Playing Fancy Pants Adventure: World 1';
       swfName = 'https://www.swfgames.ct.ws/games/fpaw1.swf';
     }
     else if (swfName == 'fpaw2') {
-      gameTitle.innerHTML = 'Play Fancy Pants Adventure: World 2';
+      gameTitle.innerHTML = 'Playing Fancy Pants Adventure: World 2';
       swfName = 'https://www.swfgames.ct.ws/games/fpaw2.swf';
     }
     else if (swfName == 'fpaw3') {
-      gameTitle.innerHTML = 'Play Fancy Pants Adventure: World 3';
+      gameTitle.innerHTML = 'Playing Fancy Pants Adventure: World 3';
       swfName = 'https://www.swfgames.ct.ws/games/fpaw3.swf';
     }
     else if (swfName == 'fpaw1r') {
-      gameTitle.innerHTML = 'Play Fancy Pants Adventure: World 1 Remix';
+      gameTitle.innerHTML = 'Playing Fancy Pants Adventure: World 1 Remix';
       swfName = 'https://www.swfgames.ct.ws/games/fpaw1r/fpaw1r.swf';
     }
     else if (swfName == 'fpas') {
-      gameTitle.innerHTML = 'Play Fancy Snowboarding';
+      gameTitle.innerHTML = 'Playing Fancy Snowboarding';
       swfName = 'https://www.swfgames.ct.ws/games/fpas.swf';
     }
     else if (!swfName) {
       gameTitle.innerHTML = 'There was an issue loading the game. Please try again later.';
       swfName = 'https://www.swfgames.ct.ws/games/default.swf';
-      document.getElementById('gameFr').style.display = "none";
+      document.getElementById('gameFr').style.display = "";
     }
     document.getElementById('gameFr').src = "https://www.swfgames.ct.ws/game-player/original.html?g=" + swfName;
 </script>
