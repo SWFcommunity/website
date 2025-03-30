@@ -1,110 +1,178 @@
-<!DOCTYPE html>
-<head>
-	<meta name="viewport"
-		content="height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui" />
-	<title>AwayFL Dynamic Player</title>
-	<style>
-		* {
-			margin: 0;
-			padding: 0;
-		}
+<title>Game Player - SWF Games</title>
+<style>
+  body {
+    margin: 0;
+    font-family: Verdana, sans-serif;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    overflow: hidden;
+  }
 
-		canvas {
-			outline: none
-		}
+  #gradient {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, #ff6d6e, rgba(255,109,110,0.93), rgba(0,0,0,0));
+    z-index: 1;
+  }
 
-		html,
-		body,
-		#container {
-			margin: 0;
-			overflow: hidden;
-			width: 100%;
-			height: 100%;
-			background-color: black;
-		}
+  #bg {
+    z-index: 0;
+  }
 
-		#splash {
-			position: absolute;
-			visibility: hidden;
-			z-index: 10;
-		}
+  #main {
+  	position: absolute;
+  	top: 0;
+  	z-index: 2;
+  	width: 100%;
+  	height: 100%;
+	overflow: auto;
+  }
 
-		#splash__image {
-			position: absolute;
-			background-size: contain;
-			background-position: center;
-			background-repeat: no-repeat;
-			background-image: url("example/splash.jpg");
-			visibility: visible;
-			transition: all 0.5s;
-			z-index: 10;
-		}
+  #main-container {
+    max-width: 830px;
+	width: 63%;
+  	min-height: 60%;
+	background: linear-gradient(to bottom, #f3f3f3, #d3d3d3);
+	border: 1px solid #a1a1a1;
+	border-radius: 5px;
+	box-shadow: inset 0 1px 0 #fff, 0 1px 13px rgba(0, 0, 0, 0.5);
+	color: #333;
+	font-family: Verdana, sans-serif;
+	font-size: 14px;
+	padding: 15px;
+	text-shadow: 0 1px 0 #fff;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+  }
 
-		#progress__root {
-			position: absolute;
-		}
+  .categories h3 {
+    color: #e60000;
+  }
 
-		#progress__line {
-			width: 0;
-			height: 100%;
-			transition: all 0.5s;
-		}
-	</style>
-	<script src="dist/loader.js"></script>
-</head>
+  #toolbar {
+    transform: translateY(-15px);
+  }
 
-<body>
-	<div id="splash__image">
-		<div id="progress__root">
-			<div id="progress__line"></div>
-		</div>
-	</div>
+  .toolbar-btn, .toolbar-btn-s {
+    background: linear-gradient(to bottom, #f3f3f3, #e1e1e1);
+    border: 1px solid #a1a1a1;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    box-shadow: inset 0 1px 0 #fff, 0 1px 3px rgba(0, 0, 0, 0.3);
+    color: #333;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    padding: 5px 10%;
+    margin: 5px;
+    margin-top: 0;
+    text-shadow: 0 1px 0 #fff;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
 
-	<script>
-		const urlParams = new URLSearchParams(window.location.search);
-		var swfName = urlParams.get('swf');
-		if (!swfName) {
-			swfName = 'default.swf';
-		}
-		const config = {
-			width: 550,
-			height: 400,
-			splash: 'example/splash.jpg',
-		    "progress": {
-		        "direction": "lr",
-		        "back": "#130d02",
-		        "line": "#f29f01",
-		        "rect": [
-		            0.25,
-		            0.77,
-		            0.5,
-		            0.01
-		        ]
-		    },
-			baseUrl: 'dist',
-			runtime: ['dist/runtime.js'],
-			binary: [{
-				path: swfName,
-				resourceType: 'GAME',
-				name: 'Game', // not used atm
-				meta: {} // not used atm
-			}],
-		}
+  .toolbar-btn:hover {
+    background: linear-gradient(to bottom, #e1e1e1, #f3f3f3);
+    cursor: pointer;
+  }
 
-		window.addEventListener("load", () => {
-			AWAYFL.LegacyLoader.init(config);
-			AWAYFL.LegacyLoader.runGame((fill) => {
-				window.dispatchEvent(new CustomEvent('awayfl-player-progress', {detail: fill}));
-			}, (config, hideLoader) => {
-				const player = new AWAYFL.Player(document, config);
-				window.dispatchEvent(new CustomEvent('awayfl-player-init', {detail: player}));
-				player
-					.loadAndPlay()
-					.then((_, hide) => {
-						window.dispatchEvent(new CustomEvent('awayfl-player-load'));
-						hide && hide() || window.swfParseComplete && window.swfParseComplete();
-					});
-			})
-		});
-	</script>
-</body>
+  .toolbar-btn:active {
+    background: linear-gradient(to bottom, #d1d1d1, #e1e1e1);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
+  }
+
+  .toolbar-btn-s {
+    background: linear-gradient(to bottom, #d1d1d1, #e1e1e1);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
+  }
+
+  footer {
+    margin-bottom: -15px;
+  	margin-left: -15px;
+  	margin-right: -15px;
+    margin-top: auto;
+    padding: 10px;
+    background-color: #f3f3f3;
+    text-align: center;
+    font-size: 14px;
+    border-top: 1px solid #a1a1a1;
+  	border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+  	height: 38px;
+  	display: flex;
+  	align-items: center;
+  	justify-content: center;
+  }
+</style>
+
+<div id="gradient"></div>
+<svg width="100%" height="100%" id="bg" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="diagonalStripes" patternUnits="userSpaceOnUse" width="20" height="20" patternTransform="rotate(45)">
+      <rect width="10" height="20" fill="#ff4d4d" />
+      <rect x="10" width="10" height="20" fill="#ff6d6e" />
+    </pattern>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#diagonalStripes)" />
+</svg>
+
+<div id="main">
+  <center>
+    <img src="https://www.swfgames.ct.ws/My%20log0-b.png" style="max-width:830px;width:70%;margin:20px;" />
+    <div id="main-container">
+      <div id="toolbar">
+        <a href="https://www.swfgames.ct.ws/games/" target="_self"><button class="toolbar-btn">Homepage</button></a>
+        <a href="https://www.swfgames.ct.ws/games/" target="_self"><button class="toolbar-btn">Games</button></a>
+        <a href="https://www.swfgames.ct.ws/about/" target="_self"><button class="toolbar-btn">About Us</button></a>
+      </div>
+      <h2>Game Player</h2>
+      <p id="gametitle">Enjoy classic Flash games and Fancy Pants games.</p>
+      <center><iframe id="gameFr" style="aspect-ratio:3/2;width:93%;margin-bottom:20px;border:1px solid #888;"></iframe></center>
+      <footer>
+        © <p id="year" style="margin-left:5px;margin-right:5px"></p> SWF Games. All Rights Reserved.
+      </footer>
+    </div>
+  </center>
+</div>
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    	var swfName = urlParams.get('g');
+    	var gameTitle = document.getElementById('gametitle');
+    if (swfName == 'fpaw1') {
+      gameTitle.innerHTML = 'Play Fancy Pants Adventure: World 1';
+      swfName = 'https://www.swfgames.ct.ws/games/fpaw1.swf';
+    }
+    else if (swfName == 'fpaw2') {
+      gameTitle.innerHTML = 'Play Fancy Pants Adventure: World 2';
+      swfName = 'https://www.swfgames.ct.ws/games/fpaw2.swf';
+    }
+    else if (swfName == 'fpaw3') {
+      gameTitle.innerHTML = 'Play Fancy Pants Adventure: World 3';
+      swfName = 'https://www.swfgames.ct.ws/games/fpaw3.swf';
+    }
+    else if (swfName == 'fpaw1r') {
+      gameTitle.innerHTML = 'Play Fancy Pants Adventure: World 1 Remix';
+      swfName = 'https://www.swfgames.ct.ws/games/fpaw1r/fpaw1r.swf';
+    }
+    else if (swfName == 'fpas') {
+      gameTitle.innerHTML = 'Play Fancy Snowboarding';
+      swfName = 'https://www.swfgames.ct.ws/games/fpas.swf';
+    }
+    else if (!swfName) {
+      gameTitle.innerHTML = 'There was an issue loading the game. Please try again later.';
+      swfName = 'https://www.swfgames.ct.ws/games/default.swf';
+  	  document.getElementById('gameFr').style.display = "none";
+    }
+  	document.getElementById('gameFr').src = "https://www.swfgames.ct.ws/game-player/original.html?g=" + swfName;
+</script>
+<script>
+const d = new Date();
+let year = d.getFullYear();
+document.getElementById("year").innerHTML = year;
+</script>
