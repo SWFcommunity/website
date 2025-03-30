@@ -1,5 +1,5 @@
 <body style="margin: 0;">
-	<embed style="width:100%;height:100vh;" pluginspage=" http://www.macromedia.com/go/getflashplayer" src="swfName" type="application/x-shockwave-flash"></embed>
+	<embed id="gamefr" style="width:100%;height:100vh;" pluginspage=" http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash"></embed>
 	<script>
         const urlParams = new URLSearchParams(window.location.search);
 		var swfName = urlParams.get('g');
@@ -21,5 +21,7 @@
         else if (!swfName) {
 			swfName = 'https://www.swfgames.ct.ws/games/default.swf';
 		}
+		
+		document.getElementById('gamefr').src = swfName;
     </script>
 </body>
