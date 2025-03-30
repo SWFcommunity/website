@@ -11,7 +11,7 @@ const global = <any>window;
 
 let AWAY_EMBED_CFG: IBindingConfig;
 
-if (global.swfObject || global.SWFObject || global.swfobject) {
+if (global.swfObject) {
     console.warn("Replace `swfObject` with AwayFl loader!");
 }
 
@@ -26,6 +26,9 @@ function createRuntimeFrame(
         global.AWAY_EMBED_CFG = {};
     }
     AWAY_EMBED_CFG = global.AWAY_EMBED_CFG;
+
+    const splash = AWAY_EMBED_CFG.splash;
+    const progress = AWAY_EMBED_CFG.progress;
 
     const player = new AwayPlayerComponent();
     player.src = swfUrl;
@@ -99,6 +102,4 @@ const swfObject = {
 };
 
 global.swfObject = swfObject;
-global.SWFObject = swfObject;
-global.swfobject = swfObject;
 

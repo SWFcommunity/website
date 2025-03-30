@@ -1,212 +1,110 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="https://www.swfgames.ct.ws/My%20log0.png">
-    <title>SWF Games</title>
-    <style>
-/* Global Styles */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background: #121212; /* Dark background */
-    color: #fff; /* Light text color */
-}
+	<meta name="viewport"
+		content="height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui" />
+	<title>AwayFL Dynamic Player</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
 
-.container {
-    width: 80%;
-    margin: 0 auto;
-}
+		canvas {
+			outline: none
+		}
 
-header {
-    background: #000; /* Black header */
-    padding: 20px 0;
-    color: #fff;
-    text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-}
+		html,
+		body,
+		#container {
+			margin: 0;
+			overflow: hidden;
+			width: 100%;
+			height: 100%;
+			background-color: black;
+		}
 
-#nav-container {
-    float: right;
-}
+		#splash {
+			position: absolute;
+			visibility: hidden;
+			z-index: 10;
+		}
 
-#nav-container a {
-    color: #f44336; /* Red links */
-    text-decoration: none;
-}
+		#splash__image {
+			position: absolute;
+			background-size: contain;
+			background-position: center;
+			background-repeat: no-repeat;
+			background-image: url("example/splash.jpg");
+			visibility: visible;
+			transition: all 0.5s;
+			z-index: 10;
+		}
 
-#nav-container a:hover {
-    text-decoration: underline;
-}
+		#progress__root {
+			position: absolute;
+		}
 
-.main-content {
-    padding: 40px;
-    background: #1e1e1e; /* Dark background for content */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    margin-top: 20px;
-    width: 80%;
-    max-width: 830px;
-    border-radius: 10px;
-}
-
-#search-bar {
-    margin-top: 20px;
-}
-
-#search-bar input {
-    padding: 10px;
-    font-size: 16px;
-    width: 80%;
-    margin-right: 10px;
-    border-radius: 5px;
-    border: 1px solid #f44336; /* Red border */
-    background: #333; /* Dark background for input */
-    color: #fff; /* Light text color in input */
-}
-
-#search-bar button {
-    padding: 10px 20px;
-    font-size: 16px;
-    background: #f44336; /* Red background */
-    border: none;
-    border-radius: 5px;
-    color: white;
-    cursor: pointer;
-}
-
-#search-bar button:hover {
-    background: #d32f2f; /* Darker red on hover */
-}
-
-.categories {
-    margin-top: 40px;
-}
-
-.categories h3 {
-    color: #f44336; /* Red text for categories */
-}
-
-.categories ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.categories li {
-    margin: 10px 0;
-}
-
-.categories a {
-    color: #f44336; /* Red links */
-    text-decoration: none;
-}
-
-.categories a:hover {
-    text-decoration: underline;
-}
-
-footer {
-    background: #000; /* Black footer */
-    color: #fff;
-    text-align: center;
-    padding: 10px;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-}
-    </style>
+		#progress__line {
+			width: 0;
+			height: 100%;
+			transition: all 0.5s;
+		}
+	</style>
+	<script src="dist/loader.js"></script>
 </head>
+
 <body>
-    <header>
-        <div class="container">
-            <img src="https://www.swfgames.ct.ws/My%20log0-b.png" style="max-width:800px;width:80%;"></img><br>
-            <div id="nav-container">
-                <a href="https://www.swfgames.ct.ws/">Homepage</a>
-            </div>
-        </div>
-    </header>
+	<div id="splash__image">
+		<div id="progress__root">
+			<div id="progress__line"></div>
+		</div>
+	</div>
 
-  <center>
-    <div class="main-content">
-        <h2 id="gametitle" style="margin-top:0;"></h2>
-        <div id='ruffle' style="text-align: center;"></div>
+	<script>
+		const urlParams = new URLSearchParams(window.location.search);
+		var swfName = urlParams.get('swf');
+		if (!swfName) {
+			swfName = 'default.swf';
+		}
+		const config = {
+			width: 550,
+			height: 400,
+			splash: 'example/splash.jpg',
+		    "progress": {
+		        "direction": "lr",
+		        "back": "#130d02",
+		        "line": "#f29f01",
+		        "rect": [
+		            0.25,
+		            0.77,
+		            0.5,
+		            0.01
+		        ]
+		    },
+			baseUrl: 'dist',
+			runtime: ['dist/runtime.js'],
+			binary: [{
+				path: swfName,
+				resourceType: 'GAME',
+				name: 'Game', // not used atm
+				meta: {} // not used atm
+			}],
+		}
 
-    </div>
-  </center>
-
-    <footer>
-        <p>&copy; 2025 SWF Games. All Rights Reserved.</p>
-    </footer>
-      
-      <script>
-        const urlParams = new URLSearchParams(window.location.search);
-		var swfName = urlParams.get('g');
-        var gameTitle = document.getElementById('gametitle');
-        if (swfName == 'fpaw1') {
-        	gameTitle.innerHTML = 'Play Fancy Pants Adventure: World 1';
-			swfName = 'https://www.swfgames.ct.ws/games/fpaw1.swf';
-		}
-        else if (swfName == 'fpaw2') {
-        	gameTitle.innerHTML = 'Play Fancy Pants Adventure: World 2';
-			swfName = 'https://www.swfgames.ct.ws/games/fpaw2.swf';
-		}
-        else if (swfName == 'fpaw3') {
-        	gameTitle.innerHTML = 'Play Fancy Pants Adventure: World 3';
-			swfName = 'https://www.swfgames.ct.ws/games/fpaw3.swf';
-		}
-        else if (swfName == 'fpaw1r') {
-        	gameTitle.innerHTML = 'Play Fancy Pants Adventure: World 1 Remix';
-			swfName = 'https://www.swfgames.ct.ws/games/fpaw1r/fpaw1r.swf';
-		}
-        else if (swfName == 'fpas') {
-        	gameTitle.innerHTML = 'Play Fancy Snowboarding';
-			swfName = 'https://www.swfgames.ct.ws/games/fpas.swf';
-		}
-        else if (!swfName) {
-        	gameTitle.innerHTML = 'There was an issue loading the game. Please try again later.';
-			swfName = 'https://www.swfgames.ct.ws/games/default.swf';
-		}
-      </script>
-      <script src='https://unpkg.com/@ruffle-rs/ruffle/ruffle.js'></script>
-        <script>
-var swfobject = {};
-
-swfobject.embedSWF = function(url, cont, width, height){
-    var ruffle = window.RufflePlayer.newest(),
-        player = Object.assign(document.getElementById(cont).appendChild(ruffle.createPlayer()), {
-            width: width,
-            height: height,
-            style: 'width: ' + width + '%; height: ' + height + 'vh',
-        });
-          
-        window.RufflePlayer.config = {
-    // Options affecting the whole page
-          
-    "publicPath": undefined,
-    "polyfills": true,
-          
-    // Options affecting files only
-          
-    "autoplay": "on",
-    "unmuteOverlay": "hidden",
-    "letterbox": "on",
-    "warnOnUnsupportedContent": false,
-    "contextMenu": true,
-    "logLevel": "error",
-    "menu": true,
-    "salign": "",
-    "scale": "showAll",
-    "forceScale": true,
-    "quality": "high",
-    "splashScreen": true,
-    "preloader": true,
-    "playerVersion": "13",
-    "allowScriptAccess": true,
-};
-    player.load({ url: url });
-}
-swfobject.embedSWF(swfName, 'ruffle', 100,55);
-        </script>
+		window.addEventListener("load", () => {
+			AWAYFL.LegacyLoader.init(config);
+			AWAYFL.LegacyLoader.runGame((fill) => {
+				window.dispatchEvent(new CustomEvent('awayfl-player-progress', {detail: fill}));
+			}, (config, hideLoader) => {
+				const player = new AWAYFL.Player(document, config);
+				window.dispatchEvent(new CustomEvent('awayfl-player-init', {detail: player}));
+				player
+					.loadAndPlay()
+					.then((_, hide) => {
+						window.dispatchEvent(new CustomEvent('awayfl-player-load'));
+						hide && hide() || window.swfParseComplete && window.swfParseComplete();
+					});
+			})
+		});
+	</script>
 </body>
-</html>

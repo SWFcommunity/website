@@ -13,7 +13,6 @@ interface IAwayPlayer {
 
 const scriptSrc = (<HTMLScriptElement>document.currentScript).src;
 const scriptBaseUrl = new URL('.', scriptSrc).href;
-const defaultSplashUrl = new URL('./assets/splash.jpg', scriptBaseUrl).href;
 const defaultProgress = {
     "direction": "lr",
     "back": "#130d02",
@@ -38,9 +37,8 @@ export interface IBindingConfig {
     onError?: string;
     scaleMode?: string;
     autoplay?: boolean;
-    backgroundColor?: string;
     splash?: string | boolean,
-    progress?: boolean | {
+    progress?: {
 		back: string;
 		rect: [number, number, number, number],
 		line: string;
@@ -59,21 +57,9 @@ export interface IBindingConfig {
 
     /**
      * @kind Runtime
-     * @description Smooth bitmaps by default. Flash Player defaults to pixelated scaling.
+     * @description Smooth bitmaps by default, by default Flash use is pixilate 
      */
-    smoothBitmaps?: boolean;
-
-    /**
-     * @kind Runtime
-     * @description Enable blend modes (experimental)
-     */
-    enableBlends?: boolean;
-
-    /**
-     * @kind Runtime
-     * @description Enable filters such as blur and glow (experimental)
-     */
-    enableFilters?: boolean;
+     smoothBitmaps?: boolean;
 }
 
 type TBindingScheme = {[key in keyof IBindingConfig]: {required?: boolean, default?: any}};
@@ -100,16 +86,12 @@ export class AwayPlayerComponent extends HTMLElement {
         onError: {required: false},
         scaleMode: {required: false, default: 'all'},
         autoplay: {required: false, default: true},
-        hideBeforeLoad: {required: false, default: false},
         maxStageScale: {required: false, default: undefined},
-        backgroundColor: {required: false, default: 'black'},
-        splash: {required: false, default: defaultSplashUrl},
+        splash: {required: false, default: 'splash.jpg'},
         progress: {required: false, default: defaultProgress},
 
         // runtime
         smoothBitmaps: {required: false, default: false},
-        enableBlends: {required: false, default: false},
-        enableFilters: {required: false, default: false},
     };
 
     _loaderHolder: HTMLDivElement;
@@ -234,11 +216,12 @@ export class AwayPlayerComponent extends HTMLElement {
     _buildTemplate(frame: HTMLIFrameElement): string {
         const t: string = template;
         const urls = this._getRuntimeUrl();
+        const global = <any>window;
+        const globalCfg = global.AWAY_EMBED_CFG;
      
         const gameConfig = {
             width: frame.clientWidth,
             height: frame.clientHeight,
-            backgroundColor: this._runConfig.backgroundColor,
             splash: this._runConfig.splash,
             progress: this._runConfig.progress,
             runtime: [urls.runtime],
@@ -252,9 +235,7 @@ export class AwayPlayerComponent extends HTMLElement {
             baseUrl: urls.baseUrl,
             maxStageScale: +this._runConfig.maxStageScale,
             runtimeFlags: {
-                defaultSmoothBitmap: !!this._runConfig.smoothBitmaps,
-                enableBlends: !!this._runConfig.enableBlends,
-                enableFilters: !!this._runConfig.enableFilters,
+                defaultSmoothBitmap: !!this._runConfig.smoothBitmaps
             }
         }
     
@@ -268,7 +249,7 @@ export class AwayPlayerComponent extends HTMLElement {
         const frame = document.createElement('iframe');
 
         frame.style.border = 'none';
-        frame.style.display = this._runConfig.hideBeforeLoad ? 'none' : ''
+        frame.style.display = this._runConfig.splash === false ? 'none' : ''
 
         frame.width = '' + this._runConfig.width;
         frame.height = '' + this._runConfig.height;

@@ -37,43 +37,35 @@ export class ProgressUI {
 
 		const config = this.config;
 
-		if (config.backgroundColor) {
-			document.body.style.backgroundColor = config.backgroundColor;
-		}
-
-		if (config.splash) {
-			Object.assign( this.splash.style, {
-				backgroundImage: `url(${config.splash})`,
-				visibility: "visible",
-			});
-		}
+		Object.assign( this.splash.style, {
+			backgroundImage: `url(${config.splash})`,
+			visibility: "visible",
+		});
 
 		const pr_conf = config.progress;
-		if (typeof pr_conf === "object") {
-			pr_conf.rect = pr_conf.rect || [0.1, 0.9, 0.8, 0.01];
+		pr_conf.rect = pr_conf.rect || [0.1, 0.9, 0.8, 0.01];
 
-			Object.assign(this.prRoot.style, {
-				background: pr_conf.back,
-				left: `${100 * pr_conf.rect[0]}%`,
-				top: `${100 * pr_conf.rect[1]}%`,
-				width: `${100 * pr_conf.rect[2]}%`,
-				height: `${100 * pr_conf.rect[3]}%`,
-			});
-	
-			Object.assign(this.prLine.style, {
-				background: pr_conf.line,
-			});
-		}
+		Object.assign(this.prRoot.style, {
+			background: pr_conf.back,
+			left: `${100 * pr_conf.rect[0]}%`,
+			top: `${100 * pr_conf.rect[1]}%`,
+			width: `${100 * pr_conf.rect[2]}%`,
+			height: `${100 * pr_conf.rect[3]}%`,
+		});
+
+		Object.assign(this.prLine.style, {
+			background: pr_conf.line,
+		});
 
 		this.onUpdate();
 	}
 
 	onProgress (p: number) {
-		const pr_conf = this.config.progress;
-
-		if (!this.prLine || !pr_conf) {
+		if (!this.prLine) {
 			return;
 		}
+
+		const pr_conf = this.config.progress;
 
 		switch (pr_conf.direction) {
 			case "tb": {
