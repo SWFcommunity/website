@@ -63,29 +63,22 @@
 	<script>
         const urlParams = new URLSearchParams(window.location.search);
 		var swfName = urlParams.get('g');
-        var gameTitle = document.getElementById('gametitle');
         if (swfName == 'fpaw1') {
-        	gameTitle.innerHTML = 'Play Fancy Pants Adventure: World 1';
 			swfName = 'https://www.swfgames.ct.ws/games/fpaw1.swf';
 		}
         else if (swfName == 'fpaw2') {
-        	gameTitle.innerHTML = 'Play Fancy Pants Adventure: World 2';
 			swfName = 'https://www.swfgames.ct.ws/games/fpaw2.swf';
 		}
         else if (swfName == 'fpaw3') {
-        	gameTitle.innerHTML = 'Play Fancy Pants Adventure: World 3';
 			swfName = 'https://www.swfgames.ct.ws/games/fpaw3.swf';
 		}
         else if (swfName == 'fpaw1r') {
-        	gameTitle.innerHTML = 'Play Fancy Pants Adventure: World 1 Remix';
 			swfName = 'https://www.swfgames.ct.ws/games/fpaw1r/fpaw1r.swf';
 		}
         else if (swfName == 'fpas') {
-        	gameTitle.innerHTML = 'Play Fancy Snowboarding';
 			swfName = 'https://www.swfgames.ct.ws/games/fpas.swf';
 		}
         else if (!swfName) {
-        	gameTitle.innerHTML = 'There was an issue loading the game. Please try again later.';
 			swfName = 'https://www.swfgames.ct.ws/games/default.swf';
 		}
     </script>
