@@ -1,4 +1,4 @@
-<body>
+<body style="margin: 0;">
 	<div id='ruffle' style="text-align: center;"></div>
 	<script src='https://unpkg.com/@ruffle-rs/ruffle/ruffle.js'></script>
 	<script>
@@ -61,6 +61,6 @@ swfobject.embedSWF = function(url, cont, width, height){
 };
     player.load({ url: url });
 }
-swfobject.embedSWF('swfName', 'ruffle', 100,100);
+swfobject.embedSWF(swfName, 'ruffle', 100,100);
     </script>
 </body>
