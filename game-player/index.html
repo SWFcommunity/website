@@ -22,31 +22,31 @@
   }
 
   #main {
-  	position: absolute;
-  	top: 0;
-  	z-index: 2;
-  	width: 100%;
-  	height: 100%;
-	overflow: auto;
+    position: absolute;
+    top: 0;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
   }
 
   #main-container {
     max-width: 830px;
-	width: 63%;
-  	min-height: 60%;
-	background: linear-gradient(to bottom, #f3f3f3, #d3d3d3);
-	border: 1px solid #a1a1a1;
-	border-radius: 5px;
-	box-shadow: inset 0 1px 0 #fff, 0 1px 13px rgba(0, 0, 0, 0.5);
-	color: #333;
-	font-family: Verdana, sans-serif;
-	font-size: 14px;
-	padding: 15px;
-	text-shadow: 0 1px 0 #fff;
-	-webkit-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-	margin-bottom: 20px;
+    width: 63%;
+    min-height: 60%;
+    background: linear-gradient(to bottom, #f3f3f3, #d3d3d3);
+    border: 1px solid #a1a1a1;
+    border-radius: 5px;
+    box-shadow: inset 0 1px 0 #fff, 0 1px 13px rgba(0, 0, 0, 0.5);
+    color: #333;
+    font-family: Verdana, sans-serif;
+    font-size: 14px;
+    padding: 15px;
+    text-shadow: 0 1px 0 #fff;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    margin-bottom: 20px;
     display: flex;
     flex-direction: column;
   }
@@ -94,20 +94,30 @@
 
   footer {
     margin-bottom: -15px;
-  	margin-left: -15px;
-  	margin-right: -15px;
+    margin-left: -15px;
+    margin-right: -15px;
     margin-top: auto;
     padding: 10px;
     background-color: #f3f3f3;
     text-align: center;
     font-size: 14px;
     border-top: 1px solid #a1a1a1;
-  	border-bottom-left-radius: 5px;
+    border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
-  	height: 38px;
-  	display: flex;
-  	align-items: center;
-  	justify-content: center;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  #gameFr {
+    aspect-ratio: 3 / 2;
+    max-width: 95%;
+    width: 100%;
+    height: auto;
+    max-height: 70vh; /* Limit the height to 70% of the viewport */
+    margin-bottom: 20px;
+    border: 1px solid #888;
   }
 </style>
 
@@ -133,17 +143,18 @@
       </div>
       <h2>Game Player</h2>
       <p id="gametitle">Enjoy classic Flash games and Fancy Pants games.</p>
-      <center><iframe id="gameFr" style="aspect-ratio:3/2;max-width:95%;min-height:40vh;margin-bottom:20px;border:1px solid #888;"></iframe></center>
+      <center><iframe id="gameFr"></iframe></center>
       <footer>
         © <p id="year" style="margin-left:5px;margin-right:5px"></p> SWF Games. All Rights Reserved.
       </footer>
     </div>
   </center>
 </div>
+
 <script>
     const urlParams = new URLSearchParams(window.location.search);
-    	var swfName = urlParams.get('g');
-    	var gameTitle = document.getElementById('gametitle');
+    var swfName = urlParams.get('g');
+    var gameTitle = document.getElementById('gametitle');
     if (swfName == 'fpaw1') {
       gameTitle.innerHTML = 'Play Fancy Pants Adventure: World 1';
       swfName = 'https://www.swfgames.ct.ws/games/fpaw1.swf';
@@ -167,12 +178,13 @@
     else if (!swfName) {
       gameTitle.innerHTML = 'There was an issue loading the game. Please try again later.';
       swfName = 'https://www.swfgames.ct.ws/games/default.swf';
-  	  document.getElementById('gameFr').style.display = "none";
+      document.getElementById('gameFr').style.display = "none";
     }
-  	document.getElementById('gameFr').src = "https://www.swfgames.ct.ws/game-player/original.html?g=" + swfName;
+    document.getElementById('gameFr').src = "https://www.swfgames.ct.ws/game-player/original.html?g=" + swfName;
 </script>
+
 <script>
-const d = new Date();
-let year = d.getFullYear();
-document.getElementById("year").innerHTML = year;
+  const d = new Date();
+  let year = d.getFullYear();
+  document.getElementById("year").innerHTML = year;
 </script>
