@@ -194,7 +194,11 @@
   		button1.style.color = "#FFF";
   		button2.style.background = "linear-gradient(to bottom, #f3f3f3, #e1e1e1)";
   		button2.style.color = "#333";
-  		document.getElementById('gameFr').src = "https://www.swfgames.ct.ws/game-player/ruffle.html?g=" + swfName;
+  		if (swfName == 'fpaw1r') {
+  			document.getElementById('gameFr').src = "https://www.swfgames.ct.ws/games/fpaw1r/ruffle.html";
+  		} else {
+  			document.getElementById('gameFr').src = "https://www.swfgames.ct.ws/game-player/ruffle.html?g=" + swfName;
+  		}
     });
   
   	button2.addEventListener('click', function() {
@@ -202,7 +206,11 @@
   		button2.style.color = "#FFF";
   		button1.style.background = "linear-gradient(to bottom, #f3f3f3, #e1e1e1)";
   		button1.style.color = "#333";
-  		document.getElementById('gameFr').src = "https://www.swfgames.ct.ws/game-player/awayfl.html?g=" + swfName;
+  		if (swfName == 'fpaw1r') {
+  			document.getElementById('gameFr').src = "https://www.swfgames.ct.ws/games/fpaw1r/awayfl.html";
+  		} else {
+  			document.getElementById('gameFr').src = "https://www.swfgames.ct.ws/game-player/awayfl.html?g=" + swfName;
+  		}
     });
 </script>
 
@@ -224,7 +232,7 @@
     }
     else if (swfName == 'fpaw1r') {
       gameTitle.innerHTML = 'Playing Fancy Pants Adventure: World 1 Remix';
-      swfName = 'https://www.swfgames.ct.ws/games/fpaw1r/fpaw1r.swf';
+      document.getElementById('gameFr').src = "https://www.swfgames.ct.ws/games/fpaw1r/original.html";
     }
     else if (swfName == 'fpas') {
       gameTitle.innerHTML = 'Playing Fancy Snowboarding';
