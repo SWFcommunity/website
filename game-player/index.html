@@ -230,10 +230,6 @@
       gameTitle.innerHTML = 'Playing Fancy Pants Adventure: World 3';
       swfName = 'https://www.swfgames.ct.ws/games/fpaw3.swf';
     }
-    else if (swfName == 'fpaw1r') {
-      gameTitle.innerHTML = 'Playing Fancy Pants Adventure: World 1 Remix';
-      document.getElementById('gameFr').src = "https://www.swfgames.ct.ws/games/fpaw1r/original.html";
-    }
     else if (swfName == 'fpas') {
       gameTitle.innerHTML = 'Playing Fancy Snowboarding';
       swfName = 'https://www.swfgames.ct.ws/games/fpas.swf';
@@ -243,7 +239,11 @@
       swfName = 'https://www.swfgames.ct.ws/games/default.swf';
       document.getElementById('gameFr').style.display = "";
     }
-    document.getElementById('gameFr').src = "https://www.swfgames.ct.ws/game-player/original.html?g=" + swfName;
+  	if (swfName == 'fpaw1r') {
+    	document.getElementById('gameFr').src = "https://www.swfgames.ct.ws/games/fpaw1r/original.html";
+  	} else {
+  		document.getElementById('gameFr').src = "https://www.swfgames.ct.ws/game-player/original.html?g=" + swfName;
+  	}
 </script>
 
 <script>
